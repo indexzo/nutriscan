@@ -40,7 +40,7 @@ export function NutriScoreCard({ grade }: { grade: NutriGrade | null }) {
             transition={{ type: "spring", stiffness: 220, damping: 16, delay: 0.2 }}
             className={cn(
               "relative flex size-28 items-center justify-center rounded-[2rem] bg-gradient-to-br text-6xl font-bold uppercase",
-              style ? `${style.badge} text-white` : "from-zinc-800 to-zinc-900 text-zinc-500",
+              style ? `${style.badge} text-[#fafafa]` : "from-zinc-800 to-zinc-900 text-zinc-500",
             )}
             style={
               style
@@ -55,7 +55,7 @@ export function NutriScoreCard({ grade }: { grade: NutriGrade | null }) {
           </motion.div>
         </div>
 
-        <p className="text-center text-sm font-medium text-zinc-400">
+        <p className="text-center text-sm font-medium text-[#a1a1aa]">
           {style ? style.label : "Nutri-Score not available"}
         </p>
 

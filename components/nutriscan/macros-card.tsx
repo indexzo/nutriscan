@@ -26,11 +26,11 @@ function MacroTooltip({ active, payload }: TooltipContentProps) {
           style={{ backgroundColor: item.color, boxShadow: `0 0 10px ${item.color}` }}
           aria-hidden
         />
-        <span className="text-xs font-medium text-zinc-400">{item.name}</span>
+        <span className="text-xs font-medium text-[#a1a1aa]">{item.name}</span>
       </div>
-      <p className="mt-1 text-lg font-semibold tracking-tight text-white">
+      <p className="mt-1 text-lg font-semibold tracking-tight text-[#fafafa]">
         {item.value.toFixed(1)}
-        <span className="ml-0.5 text-xs font-medium text-zinc-400">g / 100g</span>
+        <span className="ml-0.5 text-xs font-medium text-[#a1a1aa]">g / 100g</span>
       </p>
     </div>
   )
@@ -86,8 +86,8 @@ export function MacrosCard({ macros }: { macros: Product["macros"] }) {
           </PieChart>
         </ResponsiveContainer>
         <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center">
-          <span className="text-3xl font-semibold tracking-tight text-white">{total.toFixed(0)}g</span>
-          <span className="text-xs text-zinc-400">total macros</span>
+          <span className="text-3xl font-semibold tracking-tight text-[#fafafa]">{total.toFixed(0)}g</span>
+          <span className="text-xs text-[#a1a1aa]">total macros</span>
         </div>
       </div>
 
@@ -98,7 +98,7 @@ export function MacrosCard({ macros }: { macros: Product["macros"] }) {
           return (
             <li
               key={m.key}
-              className="rounded-2xl border border-zinc-800 bg-zinc-950/60 px-3 py-2.5 transition-all duration-500 hover:-translate-y-0.5 hover:border-zinc-700"
+              className="rounded-2xl border border-[#222228] bg-[#09090b]/60 px-3 py-2.5 transition-all duration-500 hover:-translate-y-0.5 hover:border-zinc-700"
             >
               <div className="flex items-center gap-1.5">
                 <span
@@ -106,9 +106,9 @@ export function MacrosCard({ macros }: { macros: Product["macros"] }) {
                   style={{ backgroundColor: m.color, boxShadow: `0 0 8px ${m.color}` }}
                   aria-hidden
                 />
-                <span className="text-[11px] font-medium text-zinc-400">{m.label}</span>
+                <span className="text-[11px] font-medium text-[#a1a1aa]">{m.label}</span>
               </div>
-              <p className="mt-1 text-sm font-semibold text-white">
+              <p className="mt-1 text-sm font-semibold text-[#fafafa]">
                 {value.toFixed(1)}g <span className="font-normal text-zinc-500">· {pct}%</span>
               </p>
             </li>

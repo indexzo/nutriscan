@@ -7,9 +7,8 @@ import { cn } from "@/lib/utils"
 
 const SUGGESTIONS = [
   { label: "Nutella", query: "3017620422003" },
-  { label: "Greek yogurt", query: "greek yogurt" },
-  { label: "Oat milk", query: "oat milk" },
-  { label: "Coca-Cola", query: "5449000000996" },
+  { label: "Oats", query: "oats" },
+  { label: "Coke", query: "5449000000996" },
 ]
 
 type SearchBarProps = {
@@ -81,19 +80,19 @@ export function SearchBar({ onSearch, isLoading }: SearchBarProps) {
               onChange={(e) => setValue(e.target.value)}
               onFocus={() => setFocused(true)}
               onBlur={() => setFocused(false)}
-              placeholder="Scan barcode or search product..."
+              placeholder="Scan barcode or enter product..."
               autoComplete="off"
               enterKeyHint="search"
               maxLength={120}
-              className="min-w-0 flex-1 bg-transparent text-base text-white outline-none placeholder:text-zinc-500 sm:text-lg"
+              className="min-w-0 flex-1 bg-transparent text-base text-[#fafafa] outline-none placeholder:text-zinc-500 sm:text-lg"
             />
             <motion.button
               type="submit"
               disabled={isLoading || !value.trim()}
               whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
+              whileTap={{ scale: 0.98 }}
               transition={{ type: "spring", stiffness: 400, damping: 25 }}
-              className="group relative flex h-11 shrink-0 items-center gap-2 overflow-hidden rounded-full bg-emerald-300 px-4 text-sm font-semibold text-zinc-950 shadow-[0_0_30px_-6px_rgba(52,245,197,0.8)] outline-none transition-shadow hover:shadow-[0_0_44px_-4px_rgba(52,245,197,0.95)] focus-visible:ring-4 focus-visible:ring-emerald-300/40 disabled:cursor-not-allowed disabled:opacity-50 disabled:shadow-none sm:h-12 sm:px-6"
+              className="group relative flex h-11 shrink-0 items-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-emerald-300 to-cyan-300 px-4 text-sm font-semibold text-zinc-950 shadow-[0_0_30px_-6px_rgba(52,245,197,0.8)] outline-none transition-shadow hover:shadow-[0_0_44px_-4px_rgba(52,245,197,0.95)] focus-visible:ring-4 focus-visible:ring-emerald-300/40 disabled:cursor-not-allowed disabled:opacity-50 disabled:shadow-none sm:h-12 sm:px-6"
             >
               <span
                 aria-hidden
@@ -122,7 +121,7 @@ export function SearchBar({ onSearch, isLoading }: SearchBarProps) {
             key={s.query}
             type="button"
             onClick={() => runSuggestion(s.query)}
-            className="rounded-full border border-zinc-800 bg-zinc-900/60 px-3 py-1 text-zinc-300 backdrop-blur transition-all duration-500 hover:-translate-y-0.5 hover:border-emerald-300/40 hover:text-emerald-300 hover:shadow-[0_0_20px_-6px_rgba(52,245,197,0.6)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300/60"
+            className="rounded-full border border-[#222228] bg-[#131316]/80 px-3.5 py-1.5 text-[#a1a1aa] backdrop-blur transition-all duration-300 active:scale-[0.98] hover:-translate-y-0.5 hover:border-emerald-300/40 hover:text-emerald-300 hover:shadow-[0_0_20px_-6px_rgba(52,245,197,0.6)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300/60"
           >
             {s.label}
           </button>

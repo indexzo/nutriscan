@@ -35,7 +35,7 @@ export function TagsCard({ allergens, labels }: TagsCardProps) {
               ))}
             </ul>
           ) : (
-            <p className="flex items-center gap-2 rounded-2xl border border-zinc-800 bg-zinc-950/50 px-4 py-3 text-sm text-zinc-400">
+            <p className="flex items-center gap-2 rounded-2xl border border-[#222228] bg-[#09090b]/60 px-4 py-3 text-sm text-[#a1a1aa]">
               <ShieldCheck className="size-4 text-emerald-300" aria-hidden />
               No allergens listed for this product.
             </p>
@@ -63,7 +63,7 @@ export function TagsCard({ allergens, labels }: TagsCardProps) {
               ))}
             </ul>
           ) : (
-            <p className="rounded-2xl border border-zinc-800 bg-zinc-950/50 px-4 py-3 text-sm text-zinc-400">
+            <p className="rounded-2xl border border-[#222228] bg-[#09090b]/60 px-4 py-3 text-sm text-[#a1a1aa]">
               No labels available.
             </p>
           )}

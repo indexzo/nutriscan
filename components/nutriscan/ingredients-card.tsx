@@ -10,7 +10,7 @@ type IngredientsCardProps = {
 
 export function IngredientsCard({ ingredients, additives }: IngredientsCardProps) {
   return (
-    <BentoCard index={4} className="md:col-span-2 lg:col-span-3">
+    <BentoCard index={4} className="md:col-span-3 xl:col-span-2">
       <div className="grid gap-8 lg:grid-cols-[1.6fr_1fr]">
         <div>
           <CardHeader icon={Leaf} title="Ingredients" subtitle="As listed on the packaging" />
@@ -19,7 +19,7 @@ export function IngredientsCard({ ingredients, additives }: IngredientsCardProps
               {ingredients}
             </p>
           ) : (
-            <p className="rounded-2xl border border-zinc-800 bg-zinc-950/50 px-4 py-3 text-sm text-zinc-400">
+            <p className="rounded-2xl border border-[#222228] bg-[#09090b]/60 px-4 py-3 text-sm text-[#a1a1aa]">
               Ingredient list not available for this product.
             </p>
           )}
@@ -39,7 +39,7 @@ export function IngredientsCard({ ingredients, additives }: IngredientsCardProps
                 {additives.map((a) => (
                   <li
                     key={a}
-                    className="rounded-2xl border border-amber-400/20 bg-zinc-950/60 px-3 py-2.5 text-center font-mono text-sm font-semibold text-amber-300 transition-all duration-500 hover:-translate-y-0.5 hover:border-amber-400/40 hover:shadow-[0_0_24px_-8px_rgba(251,191,36,0.6)]"
+                    className="rounded-2xl border border-amber-400/20 bg-[#09090b]/60 px-3 py-2.5 text-center font-mono text-sm font-semibold text-amber-300 transition-all duration-500 hover:-translate-y-0.5 hover:border-amber-400/40 hover:shadow-[0_0_24px_-8px_rgba(251,191,36,0.6)]"
                   >
                     {a}
                   </li>

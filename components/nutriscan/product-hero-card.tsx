@@ -33,9 +33,19 @@ export function ProductHeroCard({ product }: { product: Product }) {
   const { energyKcal } = product.macros
 
   return (
-    <BentoCard index={0} className="p-0 sm:p-0 md:col-span-2 lg:col-span-3">
-      <div className="flex flex-col md:flex-row">
-        <div className="relative flex aspect-[4/3] items-center justify-center overflow-hidden md:aspect-auto md:min-h-72 md:w-80 md:shrink-0 lg:w-[26rem]">
+    <BentoCard index={0} className="p-0 sm:p-0 md:col-span-2">
+      {product.image && (
+        <Image
+          src={product.image}
+          alt=""
+          fill
+          aria-hidden
+          sizes="600px"
+          className="pointer-events-none scale-125 object-cover opacity-25 blur-[80px] saturate-200"
+        />
+      )}
+      <div className="relative flex h-full flex-col sm:flex-row">
+        <div className="relative flex aspect-[4/3] items-center justify-center overflow-hidden sm:aspect-auto sm:min-h-80 sm:w-2/5 sm:shrink-0">
           {product.image ? (
             <div className={`absolute inset-0 flex items-center justify-center ${FADE_MASK}`}>
               <Image
@@ -74,12 +84,12 @@ export function ProductHeroCard({ product }: { product: Product }) {
                 </span>
               )}
               {product.quantity && (
-                <span className="rounded-full border border-zinc-800 bg-zinc-950/60 px-3 py-1 text-xs font-medium text-zinc-400">
+                <span className="rounded-full border border-[#222228] bg-[#09090b]/60 px-3 py-1 text-xs font-medium text-[#a1a1aa]">
                   {product.quantity}
                 </span>
               )}
             </div>
-            <h1 className="text-balance text-3xl font-semibold tracking-tight text-white sm:text-4xl lg:text-5xl">
+            <h1 className="text-balance text-[clamp(1.75rem,3.2vw,2.75rem)] font-semibold leading-tight tracking-tight text-[#fafafa]">
               {product.name}
             </h1>
           </div>
@@ -87,7 +97,7 @@ export function ProductHeroCard({ product }: { product: Product }) {
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div>
               <p className="mb-2 text-xs font-medium uppercase tracking-[0.18em] text-zinc-500">Barcode</p>
-              <div className="flex items-center gap-4 rounded-2xl border border-zinc-800 bg-zinc-950/60 px-4 py-3">
+              <div className="flex items-center gap-4 rounded-2xl border border-[#222228] bg-[#09090b]/60 px-4 py-3">
                 <BarcodeStripes code={product.code.slice(0, 13)} />
                 <span className="font-mono text-sm tracking-widest text-zinc-200">{product.code}</span>
               </div>
@@ -95,9 +105,9 @@ export function ProductHeroCard({ product }: { product: Product }) {
             {energyKcal !== null && (
               <div className="text-right">
                 <p className="text-xs font-medium uppercase tracking-[0.18em] text-zinc-500">Energy</p>
-                <p className="text-3xl font-semibold tracking-tight text-white">
+                <p className="text-3xl font-semibold tracking-tight text-[#fafafa]">
                   {Math.round(energyKcal)}
-                  <span className="ml-1 text-base font-medium text-zinc-400">kcal / 100g</span>
+                  <span className="ml-1 text-base font-medium text-[#a1a1aa]">kcal / 100g</span>
                 </p>
               </div>
             )}
