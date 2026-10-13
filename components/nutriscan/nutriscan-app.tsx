@@ -33,21 +33,26 @@ export function NutriScanApp() {
   const hasSearched = query !== null
 
   return (
-    <div className="relative min-h-dvh overflow-x-hidden">
-      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-[520px] overflow-hidden">
-        <div className="absolute -top-40 left-1/2 size-[700px] -translate-x-1/2 rounded-full bg-gradient-to-br from-emerald-200/50 via-sky-200/40 to-violet-200/30 blur-3xl" />
+    <div className="relative min-h-dvh overflow-x-hidden bg-zinc-950">
+      <div aria-hidden className="pointer-events-none fixed inset-0 overflow-hidden">
+        <div className="mesh-drift absolute inset-0">
+          <div className="absolute -top-48 left-1/2 size-[760px] -translate-x-1/2 rounded-full bg-emerald-400/[0.07] blur-[120px]" />
+          <div className="absolute top-1/3 -left-40 size-[520px] rounded-full bg-cyan-500/[0.05] blur-[120px]" />
+          <div className="absolute -right-40 bottom-0 size-[560px] rounded-full bg-teal-400/[0.05] blur-[120px]" />
+        </div>
+        <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.035)_1px,transparent_1px)] [background-size:28px_28px] [mask-image:radial-gradient(ellipse_at_top,black_20%,transparent_70%)]" />
       </div>
 
       <header className="relative mx-auto flex max-w-6xl items-center justify-between px-4 py-6 sm:px-6">
         <div className="flex items-center gap-2.5">
-          <div className="flex size-9 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-sky-500 text-white shadow-[0_8px_20px_-8px_rgba(16,185,129,0.8)]">
+          <div className="flex size-9 items-center justify-center rounded-xl border border-emerald-300/30 bg-emerald-300/10 text-emerald-300 shadow-[0_0_24px_-4px_rgba(52,245,197,0.6)]">
             <Activity className="size-4" aria-hidden />
           </div>
-          <span className="text-base font-semibold tracking-tight">
-            NutriScan <span className="text-muted-foreground">DB</span>
+          <span className="text-base font-semibold tracking-tight text-white">
+            NutriScan <span className="text-zinc-500">DB</span>
           </span>
         </div>
-        <span className="hidden rounded-full border border-border bg-white/60 px-3 py-1 text-xs text-muted-foreground backdrop-blur sm:inline">
+        <span className="hidden rounded-full border border-zinc-800 bg-zinc-900/60 px-3 py-1 text-xs text-zinc-400 backdrop-blur sm:inline">
           Powered by Open Food Facts
         </span>
       </header>
@@ -66,17 +71,17 @@ export function NutriScanApp() {
                 exit={{ opacity: 0, y: -10, height: 0, marginBottom: 0 }}
                 className="mb-10 text-center"
               >
-                <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-100 bg-white/70 px-3 py-1 text-xs font-medium text-emerald-700 backdrop-blur">
-                  <span className="size-1.5 animate-pulse rounded-full bg-emerald-500" aria-hidden />
+                <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-emerald-300/20 bg-emerald-300/5 px-3 py-1 text-xs font-medium text-emerald-300 backdrop-blur">
+                  <span className="size-1.5 animate-pulse rounded-full bg-emerald-300 shadow-[0_0_8px_rgba(52,245,197,1)]" aria-hidden />
                   3M+ products indexed
                 </p>
-                <h1 className="text-balance text-4xl font-semibold tracking-tight text-foreground sm:text-6xl">
+                <h1 className="text-balance text-4xl font-semibold tracking-tight text-white sm:text-6xl">
                   Know what you eat,{" "}
-                  <span className="bg-gradient-to-r from-emerald-500 via-teal-500 to-sky-500 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-emerald-300 via-teal-300 to-cyan-300 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(52,245,197,0.35)]">
                     instantly.
                   </span>
                 </h1>
-                <p className="mx-auto mt-4 max-w-lg text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg">
+                <p className="mx-auto mt-4 max-w-lg text-pretty text-base leading-relaxed text-zinc-400 sm:text-lg">
                   Scan a barcode or search any product to reveal its Nutri-Score, macros, allergens and additives.
                 </p>
               </motion.div>

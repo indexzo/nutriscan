@@ -5,10 +5,12 @@ import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip, type TooltipContentP
 import type { Product } from "@/lib/openfoodfacts"
 import { BentoCard, CardHeader } from "./bento-card"
 
+const TRACK_COLOR = "#1c1c21"
+
 const MACROS = [
-  { key: "proteins", label: "Protein", color: "#10b981", soft: "bg-emerald-50", dot: "bg-emerald-500" },
-  { key: "carbohydrates", label: "Carbs", color: "#0ea5e9", soft: "bg-sky-50", dot: "bg-sky-500" },
-  { key: "fat", label: "Fat", color: "#f59e0b", soft: "bg-amber-50", dot: "bg-amber-500" },
+  { key: "proteins", label: "Protein", color: "#34f5c5" },
+  { key: "carbohydrates", label: "Carbs", color: "#38bdf8" },
+  { key: "fat", label: "Fat", color: "#f472d0" },
 ] as const
 
 type Slice = { name: string; value: number; color: string }
@@ -17,14 +19,18 @@ function MacroTooltip({ active, payload }: TooltipContentProps) {
   if (!active || !payload?.length) return null
   const item = payload[0].payload as Slice
   return (
-    <div className="rounded-2xl border border-white/60 bg-white/80 px-4 py-3 shadow-[0_12px_32px_-12px_rgba(0,0,0,0.25)] backdrop-blur-xl">
+    <div className="rounded-2xl border border-white/10 bg-zinc-950/70 px-4 py-3 shadow-[0_20px_40px_-12px_rgba(0,0,0,0.8),inset_0_1px_0_0_rgba(255,255,255,0.06)] backdrop-blur-xl">
       <div className="flex items-center gap-2">
-        <span className="size-2.5 rounded-full" style={{ backgroundColor: item.color }} aria-hidden />
-        <span className="text-xs font-medium text-muted-foreground">{item.name}</span>
+        <span
+          className="size-2.5 rounded-full"
+          style={{ backgroundColor: item.color, boxShadow: `0 0 10px ${item.color}` }}
+          aria-hidden
+        />
+        <span className="text-xs font-medium text-zinc-400">{item.name}</span>
       </div>
-      <p className="mt-1 text-lg font-semibold tracking-tight text-foreground">
+      <p className="mt-1 text-lg font-semibold tracking-tight text-white">
         {item.value.toFixed(1)}
-        <span className="ml-0.5 text-xs font-medium text-muted-foreground">g / 100g</span>
+        <span className="ml-0.5 text-xs font-medium text-zinc-400">g / 100g</span>
       </p>
     </div>
   )
@@ -40,31 +46,48 @@ export function MacrosCard({ macros }: { macros: Product["macros"] }) {
       <CardHeader icon={PieIcon} title="Macronutrients" subtitle="Per 100g" />
 
       <div className="relative mx-auto aspect-square w-full max-w-[220px]">
+        <div aria-hidden className="absolute inset-[18%] rounded-full bg-emerald-300/5 blur-2xl" />
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>
             <Pie
-              data={hasData ? data : [{ name: "None", value: 1, color: "#e5e7eb" }]}
+              data={[{ value: 1 }]}
               dataKey="value"
-              nameKey="name"
               innerRadius="68%"
               outerRadius="96%"
-              paddingAngle={hasData ? 5 : 0}
-              cornerRadius={12}
+              fill={TRACK_COLOR}
               stroke="none"
-              startAngle={90}
-              endAngle={-270}
-              animationDuration={900}
-            >
-              {(hasData ? data : [{ color: "#e5e7eb" }]).map((d, i) => (
-                <Cell key={i} fill={d.color} className="outline-none transition-opacity hover:opacity-80" />
-              ))}
-            </Pie>
+              isAnimationActive={false}
+            />
+            {hasData && (
+              <Pie
+                data={data}
+                dataKey="value"
+                nameKey="name"
+                innerRadius="72%"
+                outerRadius="92%"
+                paddingAngle={6}
+                cornerRadius={12}
+                stroke="none"
+                startAngle={90}
+                endAngle={-270}
+                animationDuration={900}
+              >
+                {data.map((d) => (
+                  <Cell
+                    key={d.name}
+                    fill={d.color}
+                    className="outline-none transition-opacity hover:opacity-80"
+                    style={{ filter: `drop-shadow(0 0 6px ${d.color}aa)` }}
+                  />
+                ))}
+              </Pie>
+            )}
             {hasData && <Tooltip content={MacroTooltip} cursor={false} wrapperStyle={{ outline: "none", zIndex: 10 }} />}
           </PieChart>
         </ResponsiveContainer>
         <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center">
-          <span className="text-3xl font-semibold tracking-tight text-foreground">{total.toFixed(0)}g</span>
-          <span className="text-xs text-muted-foreground">total macros</span>
+          <span className="text-3xl font-semibold tracking-tight text-white">{total.toFixed(0)}g</span>
+          <span className="text-xs text-zinc-400">total macros</span>
         </div>
       </div>
 
@@ -73,13 +96,20 @@ export function MacrosCard({ macros }: { macros: Product["macros"] }) {
           const value = macros[m.key]
           const pct = hasData ? Math.round((value / total) * 100) : 0
           return (
-            <li key={m.key} className={`rounded-2xl ${m.soft} px-3 py-2.5 transition-transform duration-300 hover:-translate-y-0.5`}>
+            <li
+              key={m.key}
+              className="rounded-2xl border border-zinc-800 bg-zinc-950/60 px-3 py-2.5 transition-all duration-500 hover:-translate-y-0.5 hover:border-zinc-700"
+            >
               <div className="flex items-center gap-1.5">
-                <span className={`size-2 rounded-full ${m.dot}`} aria-hidden />
-                <span className="text-[11px] font-medium text-muted-foreground">{m.label}</span>
+                <span
+                  className="size-2 rounded-full"
+                  style={{ backgroundColor: m.color, boxShadow: `0 0 8px ${m.color}` }}
+                  aria-hidden
+                />
+                <span className="text-[11px] font-medium text-zinc-400">{m.label}</span>
               </div>
-              <p className="mt-1 text-sm font-semibold text-foreground">
-                {value.toFixed(1)}g <span className="font-normal text-muted-foreground">· {pct}%</span>
+              <p className="mt-1 text-sm font-semibold text-white">
+                {value.toFixed(1)}g <span className="font-normal text-zinc-500">· {pct}%</span>
               </p>
             </li>
           )

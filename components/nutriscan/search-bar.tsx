@@ -34,31 +34,42 @@ export function SearchBar({ onSearch, isLoading }: SearchBarProps) {
 
   return (
     <div className="mx-auto w-full max-w-3xl">
-      <form onSubmit={handleSubmit} role="search" className="relative">
+      <motion.form
+        onSubmit={handleSubmit}
+        role="search"
+        className="relative"
+        animate={{ y: focused ? -2 : 0 }}
+        transition={{ type: "spring", stiffness: 300, damping: 26 }}
+      >
         <div
           aria-hidden
           className={cn(
-            "pointer-events-none absolute -inset-6 rounded-[2.5rem] bg-gradient-to-r from-emerald-300/40 via-sky-300/40 to-violet-300/40 blur-3xl transition-opacity duration-700",
-            focused ? "opacity-100" : "opacity-50",
+            "pointer-events-none absolute -inset-4 rounded-full bg-gradient-to-r from-emerald-400/20 via-cyan-400/15 to-emerald-400/20 blur-3xl transition-opacity duration-700",
+            focused ? "opacity-100" : "opacity-0",
           )}
         />
-        <div className="relative rounded-[1.75rem] p-[1.5px] shadow-[0_20px_60px_-20px_rgba(16,185,129,0.35)]">
+        <div className="relative rounded-full p-px shadow-[0_30px_80px_-30px_rgba(0,0,0,0.9)]">
           <div
             aria-hidden
             className={cn(
-              "gradient-ring absolute inset-0 rounded-[1.75rem] transition-opacity duration-500",
+              "gradient-ring absolute inset-0 rounded-full transition-opacity duration-500",
               focused ? "opacity-100" : "opacity-0",
             )}
           />
           <div
             aria-hidden
             className={cn(
-              "absolute inset-0 rounded-[1.75rem] bg-border transition-opacity duration-500",
+              "absolute inset-0 rounded-full bg-zinc-800 transition-opacity duration-500",
               focused ? "opacity-0" : "opacity-100",
             )}
           />
-          <div className="relative flex items-center gap-2 rounded-[calc(1.75rem-1.5px)] bg-white/90 p-2 backdrop-blur-xl sm:gap-3 sm:p-2.5">
-            <div className="flex size-11 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-50 to-sky-50 text-emerald-600 sm:size-12">
+          <div className="relative flex items-center gap-2 rounded-full bg-zinc-950/90 p-1.5 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)] backdrop-blur-xl sm:gap-3 sm:p-2">
+            <div
+              className={cn(
+                "flex size-11 shrink-0 items-center justify-center rounded-full transition-colors duration-500 sm:size-12",
+                focused ? "bg-emerald-300/10 text-emerald-300" : "bg-zinc-900 text-zinc-500",
+              )}
+            >
               <Search className="size-5" aria-hidden />
             </div>
             <label htmlFor="product-search" className="sr-only">
@@ -74,7 +85,7 @@ export function SearchBar({ onSearch, isLoading }: SearchBarProps) {
               autoComplete="off"
               enterKeyHint="search"
               maxLength={120}
-              className="min-w-0 flex-1 bg-transparent text-base text-foreground outline-none placeholder:text-muted-foreground/70 sm:text-lg"
+              className="min-w-0 flex-1 bg-transparent text-base text-white outline-none placeholder:text-zinc-500 sm:text-lg"
             />
             <motion.button
               type="submit"
@@ -82,11 +93,11 @@ export function SearchBar({ onSearch, isLoading }: SearchBarProps) {
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
               transition={{ type: "spring", stiffness: 400, damping: 25 }}
-              className="group relative flex h-11 shrink-0 items-center gap-2 overflow-hidden rounded-2xl bg-gradient-to-br from-emerald-500 via-teal-500 to-sky-500 px-4 text-sm font-semibold text-white shadow-[0_10px_30px_-10px_rgba(16,185,129,0.8)] outline-none transition-shadow hover:shadow-[0_14px_40px_-10px_rgba(16,185,129,0.9)] focus-visible:ring-4 focus-visible:ring-emerald-300/60 disabled:cursor-not-allowed disabled:opacity-60 sm:h-12 sm:px-6"
+              className="group relative flex h-11 shrink-0 items-center gap-2 overflow-hidden rounded-full bg-emerald-300 px-4 text-sm font-semibold text-zinc-950 shadow-[0_0_30px_-6px_rgba(52,245,197,0.8)] outline-none transition-shadow hover:shadow-[0_0_44px_-4px_rgba(52,245,197,0.95)] focus-visible:ring-4 focus-visible:ring-emerald-300/40 disabled:cursor-not-allowed disabled:opacity-50 disabled:shadow-none sm:h-12 sm:px-6"
             >
               <span
                 aria-hidden
-                className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/30 to-transparent transition-transform duration-700 group-hover:translate-x-full"
+                className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/50 to-transparent transition-transform duration-700 group-hover:translate-x-full"
               />
               {isLoading ? (
                 <Loader2 className="size-4 animate-spin" aria-hidden />
@@ -102,16 +113,16 @@ export function SearchBar({ onSearch, isLoading }: SearchBarProps) {
             </motion.button>
           </div>
         </div>
-      </form>
+      </motion.form>
 
       <div className="mt-5 flex flex-wrap items-center justify-center gap-2 text-sm">
-        <span className="text-muted-foreground">Try</span>
+        <span className="text-zinc-500">Try</span>
         {SUGGESTIONS.map((s) => (
           <button
             key={s.query}
             type="button"
             onClick={() => runSuggestion(s.query)}
-            className="rounded-full border border-border bg-white/70 px-3 py-1 text-foreground/80 backdrop-blur transition-all duration-300 hover:-translate-y-0.5 hover:border-emerald-200 hover:bg-white hover:text-emerald-700 hover:shadow-[0_8px_20px_-10px_rgba(16,185,129,0.6)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300"
+            className="rounded-full border border-zinc-800 bg-zinc-900/60 px-3 py-1 text-zinc-300 backdrop-blur transition-all duration-500 hover:-translate-y-0.5 hover:border-emerald-300/40 hover:text-emerald-300 hover:shadow-[0_0_20px_-6px_rgba(52,245,197,0.6)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300/60"
           >
             {s.label}
           </button>
